@@ -92,6 +92,7 @@ jenkins ALL = NOPASSWD: /bin/cp, /bin/mkdir, /bin/kill, /usr/bin/xargs, /usr/bin
 
     sudo systemctl restart jenkins.service
     sudo systemctl status jenkins.service
+	while ! httping -qc1 http://localhost:8081 ; do sleep 15; echo echo "===> WAIT UNTIL JENKIS STARTS"; done
 	java -jar jenkins-cli.jar -s http://127.0.0.1:8081/ build 'Spring_Petclinic_Pipeline'
   SHELL
 end
